@@ -1,3 +1,4 @@
+# Import libraries for the main code of training process
 import torch
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
@@ -6,11 +7,15 @@ from carvana_dataset import CarvanaDataset
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Using data from the data folder for training process
 img_csv_file = './data/train_masks.csv'
 train_img_dir = './data/train'
 train_mask_dir = './data/train_masks_png'
 dataset = CarvanaDataset(img_csv_file, train_img_dir, train_mask_dir)
+# Permutation the dataset and train 4 batches each time in the training procedure
 trainLoader = DataLoader(dataset, shuffle = True, batch_size = 4)
+
+# Loading 
 net = UNet().cuda()
 
 loss_fn = torch.nn.MultiLabelSoftMarginLoss()
