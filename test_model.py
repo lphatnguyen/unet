@@ -17,7 +17,7 @@ for string in filename:
     img = img.resize((256,256), Image.BILINEAR)
     tensor = torchvision.transforms.Compose([torchvision.transforms.ToTensor()])
     image = tensor(img)
-    net = torch.load('trainedModel2.pt')
+    net = torch.load('trainedModel.pt')
     inputImg = torch.autograd.Variable(image.unsqueeze(0).cuda())
     outputImg = net(inputImg)
     outputImg = torch.nn.functional.sigmoid(outputImg)
@@ -27,7 +27,6 @@ for string in filename:
     out=out*255
     i=i+1
     cv2.imwrite("./output/"+string,out)
-
 
 plt.figure()
 plt.imshow(out)
